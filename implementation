@@ -1,4 +1,38 @@
-           if (p2movesUp == true)
+namespace WindowsFormsApplication2
+{
+    public class PongGame
+    {  
+        public static Rectangle paddle1 = new Rectangle(14, 180, 20, 100);
+        public static Rectangle paddle2 = new Rectangle(566, 180, 20, 100);
+        public static Rectangle ball = new Rectangle(290, 115, 16, 16);
+        static Font Drawfont = new Font("Arial", 40);
+        public static bool p1movesUp, p1movesDown, p2movesUp, p2movesDown;
+        public static SolidBrush sb = new SolidBrush(Color.White);
+        public static double p1p;                           //Double that will store player 1 score
+        public static double p2p;                           //Double that will store player 2 score
+        static int RandoMin = 1;                            //Those 2 random integers are used to randomize ball directions
+        static int RandoMax = 3;                            //in the Randomize() method to avoid repetition of ball movement
+        public static double Xspeed = -1;                   //Beginning Initial speed
+        public static double Yspeed = 1;
+
+        public static void DrawIt(Graphics Draw)
+        {   //Draws both paddles and ball
+            Draw.Clear(Color.Black);
+            Draw.FillRectangle(sb, paddle2);
+            Draw.FillRectangle(sb, paddle1);
+            Draw.FillRectangle(sb, ball);
+            //Draw Score
+            Draw.DrawString(p1p.ToString(), Drawfont, sb, 180, 10);
+            Draw.DrawString(p2p.ToString(), Drawfont, sb, 380, 10);
+        }
+
+        public static void CheckIfMoving()                      //If player press the key to move the paddle, this method
+        {                                                       //changes the Y position of the paddle Accordingly
+            if (p1movesUp == true)
+            { int z = paddle1.Y <= 0 ? paddle1.Y = 0 : paddle1.Y -= 3; }
+            if (p1movesDown == true)
+            { int z = paddle1.Y >= 381 ? paddle1.Y = 381 : paddle1.Y += 3; }
+            if (p2movesUp == true)
             { int z = paddle2.Y <= 0 ? paddle2.Y = 0 : paddle2.Y -= 3; }
             if (p2movesDown == true)
             { int z = paddle2.Y >= 381 ? paddle2.Y = 381 : paddle2.Y += 3; }
@@ -107,6 +141,6 @@
         }
 
         private void timer2_Tick(object sender, EventArgs e)
-        { PongGame.IncreaseSpeed(); }     //Every 3 seconds, this timer will increase Overall speed
-    }
-}
+        { PongGame.IncreaseSpeed(); } //Every 3 seconds, this timer will
+       }
+      }
